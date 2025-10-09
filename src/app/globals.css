@@ -1,3 +1,4 @@
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@400;500&display=swap');
 @import 'bootstrap/dist/css/bootstrap.min.css';
 body {
   font-family: 'Arial', sans-serif;
@@ -15,7 +16,7 @@ body {
 }
 
 .bg-purple {
-  background-color: #6f42c1; /* Bootstrap's purple color */
+  background-color: #5437ED; /* Bootstrap's purple color */
 }
 
 .sidebar {
@@ -25,7 +26,9 @@ body {
 .nav-link {
   position: relative;
 }
-
+body {
+  font-family: 'Poppins', sans-serif;
+}
 .nav-link span {
   height: 100%;
   position: absolute;

@@ -1,6 +1,7 @@
 "use client";
 
 import { useState } from 'react';
+import { FaSearch } from 'react-icons/fa'; // Import search icon from react-icons
 
 export default function Layout({ children }) {
   const [isSidebarOpen, setIsSidebarOpen] = useState(true);
@@ -13,7 +14,17 @@ export default function Layout({ children }) {
           <a className="navbar-brand" href="/">
             <img src="/images/logo.png" alt="SPL Logo" height="30" />
           </a>
-          <input className="form-control w-25" type="search" placeholder="Search organizations" style={{ fontSize: '14px' }} />
+          <div className="input-group w-25">
+            <input
+              className="form-control"
+              type="search"
+              placeholder="Search organizations"
+              style={{ fontSize: '14px' }}
+            />
+            <span className="input-group-text">
+              <FaSearch style={{ fontSize: '14px' }} />
+            </span>
+          </div>
         </div>
       </nav>
 
@@ -26,7 +37,7 @@ export default function Layout({ children }) {
         >
           {/* Toggle Icon */}
           <div
-            className="position-absolute top-0 end-0 m-2"
+            className="position-absolute top-0 end-0 m-2 p-2" // Added padding
             onClick={() => setIsSidebarOpen(!isSidebarOpen)}
             style={{ cursor: 'pointer' }}
           >
@@ -54,7 +65,9 @@ export default function Layout({ children }) {
                 className="nav-link d-flex align-items-center text-dark"
                 style={{ textDecoration: 'none', fontSize: '14px' }}
               >
-                <img src="/images/home-icon.png" alt="Home" style={{ width: '20px', marginRight: '8px' }} />
+                <div className="p-2"> {/* Added padding around icon */}
+                  <img src="/images/home-icon.png" alt="Home" style={{ width: '20px', marginRight: '8px' }} />
+                </div>
                 Home
                 <span
                   className="position-absolute end-0 bg-purple h-100"
@@ -73,7 +86,9 @@ export default function Layout({ children }) {
                 className="nav-link d-flex align-items-center text-dark"
                 style={{ textDecoration: 'none', fontSize: '14px' }}
               >
-                <img src="/images/fav-icon.png" alt="Favorites" style={{ width: '20px', marginRight: '8px' }} />
+                <div className="p-2"> {/* Added padding around icon */}
+                  <img src="/images/fav-icon.png" alt="Favorites" style={{ width: '20px', marginRight: '8px' }} />
+                </div>
                 Favorites
                 <span
                   className="position-absolute end-0 bg-purple h-100"
@@ -101,7 +116,9 @@ export default function Layout({ children }) {
               className="nav-link d-flex align-items-center text-dark"
               style={{ textDecoration: 'none', fontSize: '14px' }}
             >
-              <img src="/images/logout-icon.png" alt="Log Out" style={{ width: '20px', marginRight: '8px' }} />
+              <div className="p-2"> {/* Added padding around icon */}
+                <img src="/images/logout-icon.png" alt="Log Out" style={{ width: '20px', marginRight: '8px' }} />
+              </div>
               Log Out
               <span
                 className="position-absolute end-0 bg-purple h-100"

@@ -9,7 +9,16 @@ export default function Layout({ children }) {
   return (
     <div className="d-flex flex-column" style={{ minHeight: '100vh', fontFamily: 'Poppins, sans-serif' }}>
       {/* Header */}
-      <nav className="navbar navbar-light bg-light p-3 w-100">
+      <nav
+        className="navbar navbar-light p-3 w-100"
+        style={{
+          backgroundColor: '#ffffff',
+          boxShadow: '0 4px 6px rgba(0, 0, 0, 0.1)', // Shadow effect
+          backdropFilter: 'blur(50px)', // Blur effect
+          position: 'relative',
+          zIndex: 1, // Ensure header is above panel
+        }}
+      >
         <div className="container-fluid">
           <a className="navbar-brand" href="/">
             <img src="/images/logo.png" alt="SPL Logo" height="30" />
@@ -29,15 +38,20 @@ export default function Layout({ children }) {
       </nav>
 
       {/* Main Content with Side Panel and Children */}
-      <div className="d-flex flex-grow-1">
+      <div className="d-flex flex-grow-1" style={{ marginTop: '54px' }}> {/* Offset of 54px from header */}
         {/* Side Panel */}
         <div
-          className={`bg-light sidebar ${isSidebarOpen ? 'w-239' : 'w-0'} p-3 transition-all position-relative`}
-          style={{ overflow: 'hidden', height: '645px' }}
+          className={`bg-light sidebar transition-all position-relative`}
+          style={{
+            overflow: 'hidden',
+            height: '645px',
+            width: isSidebarOpen ? '239px' : '68px', // Full width or icon-only width
+            padding: isSidebarOpen ? '1rem' : '0.5rem', // Adjust padding based on state
+          }}
         >
           {/* Toggle Icon */}
           <div
-            className="position-absolute top-0 end-0 m-2 p-2" // Added padding
+            className="position-absolute top-0 end-0 m-2 p-2"
             onClick={() => setIsSidebarOpen(!isSidebarOpen)}
             style={{ cursor: 'pointer' }}
           >
@@ -58,17 +72,21 @@ export default function Layout({ children }) {
           </div>
 
           {/* Navigation Items */}
-          <ul className="nav flex-column mt-5">
+          <ul className="nav flex-column mt-5" style={{ marginTop: '54px' }}> {/* Ensure 54px offset */}
             <li className="nav-item mb-3">
               <a
                 href="/"
                 className="nav-link d-flex align-items-center text-dark"
                 style={{ textDecoration: 'none', fontSize: '14px' }}
               >
-                <div className="p-2"> {/* Added padding around icon */}
-                  <img src="/images/home-icon.png" alt="Home" style={{ width: '20px', marginRight: '8px' }} />
+                <div className="p-2">
+                  <img
+                    src="/images/home-icon.png"
+                    alt="Home"
+                    style={{ width: '20px', marginRight: isSidebarOpen ? '8px' : '0' }}
+                  />
                 </div>
-                Home
+                {isSidebarOpen && <span>Home</span>}
                 <span
                   className="position-absolute end-0 bg-purple h-100"
                   style={{
@@ -86,10 +104,14 @@ export default function Layout({ children }) {
                 className="nav-link d-flex align-items-center text-dark"
                 style={{ textDecoration: 'none', fontSize: '14px' }}
               >
-                <div className="p-2"> {/* Added padding around icon */}
-                  <img src="/images/fav-icon.png" alt="Favorites" style={{ width: '20px', marginRight: '8px' }} />
+                <div className="p-2">
+                  <img
+                    src="/images/fav-icon.png"
+                    alt="Favorites"
+                    style={{ width: '20px', marginRight: isSidebarOpen ? '8px' : '0' }}
+                  />
                 </div>
-                Favorites
+                {isSidebarOpen && <span>Favorites</span>}
                 <span
                   className="position-absolute end-0 bg-purple h-100"
                   style={{
@@ -107,19 +129,25 @@ export default function Layout({ children }) {
           <div className="mt-auto">
             <div className="d-flex align-items-center mb-2">
               <img src="/images/profile-pic.jpg" alt="Profile" className="rounded-circle" width="40" />
-              <p className="text-muted ms-2 mb-0" style={{ fontSize: '14px' }}>
-                Zeeshan Javed<br />hello@tailgrids.com
-              </p>
+              {isSidebarOpen && (
+                <p className="text-muted ms-2 mb-0" style={{ fontSize: '14px' }}>
+                  Zeeshan Javed<br />hello@tailgrids.com
+                </p>
+              )}
             </div>
             <a
               href="/logout"
               className="nav-link d-flex align-items-center text-dark"
               style={{ textDecoration: 'none', fontSize: '14px' }}
             >
-              <div className="p-2"> {/* Added padding around icon */}
-                <img src="/images/logout-icon.png" alt="Log Out" style={{ width: '20px', marginRight: '8px' }} />
+              <div className="p-2">
+                <img
+                  src="/images/logout-icon.png"
+                  alt="Log Out"
+                  style={{ width: '20px', marginRight: isSidebarOpen ? '8px' : '0' }}
+                />
               </div>
-              Log Out
+              {isSidebarOpen && <span>Log Out</span>}
               <span
                 className="position-absolute end-0 bg-purple h-100"
                 style={{

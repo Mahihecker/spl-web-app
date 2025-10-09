@@ -11,10 +11,6 @@ body {
   box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
 }
 
-.w-239 {
-  width: 239px !important;
-}
-
 .bg-purple {
   background-color: #5437ED; /* Bootstrap's purple color */
 }

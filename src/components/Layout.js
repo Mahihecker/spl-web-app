@@ -21,7 +21,7 @@ export default function Layout({ children }) {
       >
         <div className="container-fluid">
           <a className="navbar-brand" href="/">
-            <img src="/images/logo.png" alt="SPL Logo" height="30" />
+            <img src="/images/logo.png" alt="SPL Logo" height="40" />
           </a>
           <div className="input-group w-25">
             <input
@@ -169,7 +169,7 @@ export default function Layout({ children }) {
       <footer className="bg-primary text-white p-3 text-center w-100">
         <div className="d-flex justify-content-between">
           <div style={{ fontSize: '14px' }}>
-            <img src="/images/logo2.png" alt="SPL Logo" height="20" className="me-2" />
+            <img src="/images/logo2.png" alt="SPL Logo" height="50" className="me-2" />
           </div>
           <div style={{ fontSize: '14px' }}>
             Company<br />About us

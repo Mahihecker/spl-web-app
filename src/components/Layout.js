@@ -77,13 +77,13 @@ export default function Layout({ children }) {
               <a
                 href="/"
                 className="nav-link d-flex align-items-center text-dark"
-                style={{ textDecoration: 'none', fontSize: '14px' }}
+                style={{ textDecoration: 'none', fontSize: '14px', gap: '4px' }} // Reduced gap
               >
                 <div className="p-2">
                   <img
                     src="/images/home-icon.png"
                     alt="Home"
-                    style={{ width: '20px', marginRight: isSidebarOpen ? '8px' : '0' }}
+                    style={{ width: '20px', marginRight: isSidebarOpen ? '0' : '0' }} // Removed extra margin
                   />
                 </div>
                 {isSidebarOpen && <span>Home</span>}
@@ -102,13 +102,13 @@ export default function Layout({ children }) {
               <a
                 href="/favorites"
                 className="nav-link d-flex align-items-center text-dark"
-                style={{ textDecoration: 'none', fontSize: '14px' }}
+                style={{ textDecoration: 'none', fontSize: '14px', gap: '4px' }} // Reduced gap
               >
                 <div className="p-2">
                   <img
                     src="/images/fav-icon.png"
                     alt="Favorites"
-                    style={{ width: '20px', marginRight: isSidebarOpen ? '8px' : '0' }}
+                    style={{ width: '20px', marginRight: isSidebarOpen ? '0' : '0' }} // Removed extra margin
                   />
                 </div>
                 {isSidebarOpen && <span>Favorites</span>}
@@ -130,7 +130,7 @@ export default function Layout({ children }) {
             <div className="d-flex align-items-center mb-2">
               <img src="/images/profile-pic.jpg" alt="Profile" className="rounded-circle" width="40" />
               {isSidebarOpen && (
-                <p className="text-muted ms-2 mb-0" style={{ fontSize: '14px' }}>
+                <p className="text-muted ms-2 mb-0" style={{ fontSize: '14px', marginLeft: '4px' }}>
                   Zeeshan Javed<br />hello@tailgrids.com
                 </p>
               )}
@@ -138,13 +138,13 @@ export default function Layout({ children }) {
             <a
               href="/logout"
               className="nav-link d-flex align-items-center text-dark"
-              style={{ textDecoration: 'none', fontSize: '14px' }}
+              style={{ textDecoration: 'none', fontSize: '14px', gap: '4px' }} // Reduced gap
             >
               <div className="p-2">
                 <img
                   src="/images/logout-icon.png"
                   alt="Log Out"
-                  style={{ width: '20px', marginRight: isSidebarOpen ? '8px' : '0' }}
+                  style={{ width: '20px', marginRight: isSidebarOpen ? '0' : '0' }} // Removed extra margin
                 />
               </div>
               {isSidebarOpen && <span>Log Out</span>}
@@ -166,25 +166,26 @@ export default function Layout({ children }) {
       </div>
 
       {/* Footer */}
-      <footer className="bg-primary text-white p-3 text-center w-100">
-        <div className="d-flex justify-content-between">
-          <div style={{ fontSize: '14px' }}>
+      <footer className="bg-primary text-white p-3 w-100">
+        <div className="d-flex justify-content-between" style={{ fontSize: '14px' }}>
+          <div>
             <img src="/images/logo2.png" alt="SPL Logo" height="50" className="me-2" />
           </div>
-          <div style={{ fontSize: '14px' }}>
+          <div>
             Company<br />About us
           </div>
-          <div style={{ fontSize: '14px' }}>
+          <div>
             Address<br />Center for Language Engineering (CLE)<br />University of Engineering and Technology (UET)<br />G.T. Road, Lahore 54890, Pakistan
           </div>
-          <div style={{ fontSize: '14px' }}>
+          <div>
             Socials<br />
             <a href="#"><i className="bi bi-instagram text-white me-2"></i></a>
             <a href="#"><i className="bi bi-facebook text-white me-2"></i></a>
             <a href="#"><i className="bi bi-linkedin text-white"></i></a>
           </div>
         </div>
-        <p className="mt-2" style={{ fontSize: '14px' }}>&copy; 2025. All rights reserved to Sign Language Production</p>
+        <hr className="my-2" style={{ borderColor: '#ffffff', opacity: 0.5 }} /> {/* Line above copyright */}
+        <p className="mb-0 text-start" style={{ fontSize: '14px' }}>&copy; 2025. All rights reserved to Sign Language Production</p>
       </footer>
     </div>
   );

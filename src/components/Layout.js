@@ -1,7 +1,6 @@
 "use client";
 
 import { useState } from 'react';
-import { FaHome, FaHeart, FaSignOutAlt, FaUser } from 'react-icons/fa'; // Import icons from react-icons
 
 export default function Layout({ children }) {
   const [isSidebarOpen, setIsSidebarOpen] = useState(true);
@@ -19,18 +18,10 @@ export default function Layout({ children }) {
           onClick={() => setIsSidebarOpen(!isSidebarOpen)}
           style={{ cursor: 'pointer' }}
         >
-          <FaUser
-            size={20}
-            className="text-dark"
-            style={{ transition: 'all 0.3s' }}
-          />
-          <span
-            className="position-absolute top-0 end-100 bg-purple h-100"
-            style={{
-              width: '0',
-              transition: 'width 0.3s',
-              display: 'none',
-            }}
+          <img
+            src="/images/dashboard-icon.png"
+            alt="Toggle"
+            style={{ width: '20px', transition: 'all 0.3s' }}
           />
           <span
             className="position-absolute top-0 end-100 bg-purple h-100"
@@ -51,7 +42,7 @@ export default function Layout({ children }) {
               className="nav-link d-flex align-items-center text-dark"
               style={{ textDecoration: 'none' }}
             >
-              <FaHome size={20} className="me-2" />
+              <img src="/images/home-icon.png" alt="Home" style={{ width: '20px', marginRight: '8px' }} />
               Home
               <span
                 className="position-absolute end-0 bg-purple h-100"
@@ -70,7 +61,7 @@ export default function Layout({ children }) {
               className="nav-link d-flex align-items-center text-dark"
               style={{ textDecoration: 'none' }}
             >
-              <FaHeart size={20} className="me-2" />
+              <img src="/images/fav-icon.png" alt="Favorites" style={{ width: '20px', marginRight: '8px' }} />
               Favorites
               <span
                 className="position-absolute end-0 bg-purple h-100"
@@ -96,7 +87,7 @@ export default function Layout({ children }) {
             className="nav-link d-flex align-items-center text-dark"
             style={{ textDecoration: 'none' }}
           >
-            <FaSignOutAlt size={20} className="me-2" />
+            <img src="/images/logout-icon.png" alt="Log Out" style={{ width: '20px', marginRight: '8px' }} />
             Log Out
             <span
               className="position-absolute end-0 bg-purple h-100"

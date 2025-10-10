@@ -1,0 +1,20 @@
+[
+  {
+    "role": "general",
+    "username": "Zeeshan Javed",
+    "email": "hello@tailgrids.com",
+    "pfp": "/images/profile-pic.png"
+  },
+  {
+    "role": "superadmin",
+    "username": "Super Admin",
+    "email": "admin@super.com",
+    "pfp": "/images/profile-pic.png"
+  },
+  {
+    "role": "organizationaladmin",
+    "username": "Org Admin",
+    "email": "admin@org.com",
+    "pfp": "/images/profile-pic.png"
+  }
+]

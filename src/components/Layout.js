@@ -1,192 +1,21 @@
 "use client";
 
 import { useState } from 'react';
-import { FaSearch } from 'react-icons/fa'; // Import search icon from react-icons
+import Header from './Header';
+import SidePanel from './SidePanel';
+import Footer from './Footer';
 
-export default function Layout({ children }) {
+export default function Layout({ children, placeholder = "Search organizations", userRole = "general" }) {
   const [isSidebarOpen, setIsSidebarOpen] = useState(true);
 
   return (
-    <div className="d-flex flex-column" style={{ minHeight: '100vh', fontFamily: 'Poppins, sans-serif' }}>
-      {/* Header */}
-      <nav
-        className="navbar navbar-light p-3 w-100"
-        style={{
-          backgroundColor: '#ffffff',
-          boxShadow: '0 4px 6px rgba(0, 0, 0, 0.1)', // Shadow effect
-          backdropFilter: 'blur(50px)', // Blur effect
-          position: 'relative',
-          zIndex: 1, // Ensure header is above panel
-        }}
-      >
-        <div className="container-fluid">
-          <a className="navbar-brand" href="/">
-            <img src="/images/logo.png" alt="SPL Logo" height="40" />
-          </a>
-          <div className="input-group w-25">
-            <input
-              className="form-control"
-              type="search"
-              placeholder="Search organizations"
-              style={{ fontSize: '14px' }}
-            />
-            <span className="input-group-text">
-              <FaSearch style={{ fontSize: '14px' }} />
-            </span>
-          </div>
-        </div>
-      </nav>
-
-      {/* Main Content with Side Panel and Children */}
-      <div className="d-flex flex-grow-1" style={{ marginTop: '54px' }}> {/* Offset of 54px from header */}
-        {/* Side Panel */}
-        <div
-          className={`bg-light sidebar transition-all position-relative`}
-          style={{
-            overflow: 'hidden',
-            height: '645px',
-            width: isSidebarOpen ? '239px' : '68px', // Full width or icon-only width
-            padding: isSidebarOpen ? '1rem' : '0.5rem', // Adjust padding based on state
-          }}
-        >
-          {/* Toggle Icon */}
-          <div
-            className="position-absolute top-0 end-0 m-2 p-2"
-            onClick={() => setIsSidebarOpen(!isSidebarOpen)}
-            style={{ cursor: 'pointer' }}
-          >
-            <img
-              src="/images/dashboard-icon.png"
-              alt="Toggle"
-              style={{ width: '20px', transition: 'all 0.3s' }}
-            />
-            <span
-              className="position-absolute top-0 end-100 bg-purple h-100"
-              style={{
-                width: '0',
-                transition: 'width 0.3s',
-              }}
-              onMouseEnter={(e) => (e.currentTarget.style.width = '20px')}
-              onMouseLeave={(e) => (e.currentTarget.style.width = '0')}
-            />
-          </div>
-
-          {/* Navigation Items */}
-          <ul className="nav flex-column mt-5" style={{ marginTop: '54px' }}> {/* Ensure 54px offset */}
-            <li className="nav-item mb-3">
-              <a
-                href="/"
-                className="nav-link d-flex align-items-center text-dark"
-                style={{ textDecoration: 'none', fontSize: '14px', gap: '4px' }} // Reduced gap
-              >
-                <div className="p-2">
-                  <img
-                    src="/images/home-icon.png"
-                    alt="Home"
-                    style={{ width: '20px', marginRight: isSidebarOpen ? '0' : '0' }} // Removed extra margin
-                  />
-                </div>
-                {isSidebarOpen && <span>Home</span>}
-                <span
-                  className="position-absolute end-0 bg-purple h-100"
-                  style={{
-                    width: '0',
-                    transition: 'width 0.3s',
-                  }}
-                  onMouseEnter={(e) => (e.currentTarget.style.width = '20px')}
-                  onMouseLeave={(e) => (e.currentTarget.style.width = '0')}
-                />
-              </a>
-            </li>
-            <li className="nav-item mb-3">
-              <a
-                href="/favorites"
-                className="nav-link d-flex align-items-center text-dark"
-                style={{ textDecoration: 'none', fontSize: '14px', gap: '4px' }} // Reduced gap
-              >
-                <div className="p-2">
-                  <img
-                    src="/images/fav-icon.png"
-                    alt="Favorites"
-                    style={{ width: '20px', marginRight: isSidebarOpen ? '0' : '0' }} // Removed extra margin
-                  />
-                </div>
-                {isSidebarOpen && <span>Favorites</span>}
-                <span
-                  className="position-absolute end-0 bg-purple h-100"
-                  style={{
-                    width: '0',
-                    transition: 'width 0.3s',
-                  }}
-                  onMouseEnter={(e) => (e.currentTarget.style.width = '20px')}
-                  onMouseLeave={(e) => (e.currentTarget.style.width = '0')}
-                />
-              </a>
-            </li>
-          </ul>
-
-          {/* Profile and Logout at Bottom */}
-          <div className="mt-auto">
-            <div className="d-flex align-items-center mb-2">
-              <img src="/images/profile-pic.jpg" alt="Profile" className="rounded-circle" width="40" />
-              {isSidebarOpen && (
-                <p className="text-muted ms-2 mb-0" style={{ fontSize: '14px', marginLeft: '4px' }}>
-                  Zeeshan Javed<br />hello@tailgrids.com
-                </p>
-              )}
-            </div>
-            <a
-              href="/logout"
-              className="nav-link d-flex align-items-center text-dark"
-              style={{ textDecoration: 'none', fontSize: '14px', gap: '4px' }} // Reduced gap
-            >
-              <div className="p-2">
-                <img
-                  src="/images/logout-icon.png"
-                  alt="Log Out"
-                  style={{ width: '20px', marginRight: isSidebarOpen ? '0' : '0' }} // Removed extra margin
-                />
-              </div>
-              {isSidebarOpen && <span>Log Out</span>}
-              <span
-                className="position-absolute end-0 bg-purple h-100"
-                style={{
-                  width: '0',
-                  transition: 'width 0.3s',
-                }}
-                onMouseEnter={(e) => (e.currentTarget.style.width = '20px')}
-                onMouseLeave={(e) => (e.currentTarget.style.width = '0')}
-              />
-            </a>
-          </div>
-        </div>
-
-        {/* Content Area */}
+    <div className="d-flex flex-column" style={{ minHeight: '100vh', fontFamily: 'Poppins, sans-serif', backgroundColor: '#F8F8F8' }}>
+      <Header placeholder={placeholder} />
+      <div className="d-flex flex-grow-1">
+        <SidePanel isSidebarOpen={isSidebarOpen} setIsSidebarOpen={setIsSidebarOpen} userRole={userRole} />
         <main className="p-4 flex-grow-1">{children}</main>
       </div>
-
-      {/* Footer */}
-      <footer className="bg-primary text-white p-3 w-100">
-        <div className="d-flex justify-content-between" style={{ fontSize: '14px' }}>
-          <div>
-            <img src="/images/logo2.png" alt="SPL Logo" height="50" className="me-2" />
-          </div>
-          <div>
-            Company<br />About us
-          </div>
-          <div>
-            Address<br />Center for Language Engineering (CLE)<br />University of Engineering and Technology (UET)<br />G.T. Road, Lahore 54890, Pakistan
-          </div>
-          <div>
-            Socials<br />
-            <a href="#"><i className="bi bi-instagram text-white me-2"></i></a>
-            <a href="#"><i className="bi bi-facebook text-white me-2"></i></a>
-            <a href="#"><i className="bi bi-linkedin text-white"></i></a>
-          </div>
-        </div>
-        <hr className="my-2" style={{ borderColor: '#ffffff', opacity: 0.5 }} /> {/* Line above copyright */}
-        <p className="mb-0 text-start" style={{ fontSize: '14px' }}>&copy; 2025. All rights reserved to Sign Language Production</p>
-      </footer>
+      <Footer />
     </div>
   );
 }

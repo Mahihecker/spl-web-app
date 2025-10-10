@@ -1,8 +1,9 @@
 @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@400;500&display=swap');
 @import 'bootstrap/dist/css/bootstrap.min.css';
+@import 'bootstrap-icons/font/bootstrap-icons.css';
 body {
   font-family: 'Arial', sans-serif;
-  background-color: #f0f2f5;
+  background-color: #F8F8F8;
 }
 
 .card {
@@ -30,4 +31,11 @@ body {
   position: absolute;
   top: 0;
   right: -20px; /* Adjust based on icon size */
+}
+
+
+
+/* side panel css */
+.mb-1px {
+  margin-bottom: 1px !important;
 }

@@ -7,11 +7,13 @@ export default function SidePanel({ isSidebarOpen, setIsSidebarOpen, userRole })
     <div
       className="bg-white sidebar border-end position-relative transition-all d-flex flex-column"
       style={{
-        overflow: 'outofflow',
-        height: '492px',
+        overflow: 'hidden',
+        height: 'calc(100vh - 60px)',
         width: isSidebarOpen ? '190px' : '55px',
         paddingLeft: '2px',
         transition: 'width 0.3s ease',
+        position: 'absolute',
+        zIndex: 1,
       }}
     >
       {/* Toggle Icon */}
@@ -35,3 +37,5 @@ export default function SidePanel({ isSidebarOpen, setIsSidebarOpen, userRole })
     </div>
   );
 }
+
+

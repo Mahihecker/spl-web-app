@@ -1,0 +1,16 @@
+[
+  {
+    "id": "1",
+    "title": "World",
+    "description": "The planet we live on",
+    "thumbnail": "thumbnails/world_thumb.jpg",
+    "signgen_output": null
+  },
+  {
+    "id": "2",
+    "title": "Sun",
+    "description": "The star at the center",
+    "thumbnail": "thumbnails/sun_thumb.jpg",
+    "signgen_output": null
+  }
+]

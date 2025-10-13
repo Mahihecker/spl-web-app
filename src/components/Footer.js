@@ -1,6 +1,14 @@
-"use client";
+// src/components/Footer.js
+'use client';
+
+import { usePathname } from 'next/navigation';
 
 export default function Footer() {
+  const pathname = usePathname();
+  if (['/login', '/signup'].includes(pathname)) {
+    return null;
+  }
+
   return (
     <footer className="bg-purple text-white p-3 w-100 d-flex flex-column justify-content-between" style={{ height: '190px', fontFamily: 'Poppins, sans-serif'}}>
       <div className="d-flex justify-content-between" style={{ gap: '10px', padding: '6px 15px' }}>
@@ -39,3 +47,4 @@ export default function Footer() {
     </footer>
   );
 }
+

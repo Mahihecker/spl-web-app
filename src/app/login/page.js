@@ -1,63 +1,70 @@
-"use client";
-import { useState } from 'react';
+// src/app/(public)/login/page.js
+'use client';
 
-export default function Login() {
+import { useState } from 'react';
+import { Container, Form, Button, Alert } from 'react-bootstrap';
+import { useAuth } from '../../context/AuthContext';
+import { useRouter } from 'next/navigation';
+
+export default function LoginPage() {
   const [username, setUsername] = useState('');
+  const [isLoading, setIsLoading] = useState(false);
   const [password, setPassword] = useState('');
-  const [error, setError] = useState(null);
+  const [error, setError] = useState('');
+  const { login } = useAuth();
+  const router = useRouter();
 
   const handleLogin = async (e) => {
     e.preventDefault();
-    setError(null);
-
+    setError('');
+    setIsLoading(true);
     try {
-      const response = await fetch('http://localhost:8000/api/user/login/', {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ username, password }),
-      });
-
-      const data = await response.json();
-
-      if (!response.ok) {
-        throw new Error(data.detail || 'Login failed');
+      const role = await login(username, password);
+      if (role === 'general') {
+        router.push('/general/dashboard');
+      } else if (role === 'superadmin') {
+        router.push('/superAdmin/dashboard');
+      } else if (role === 'orgadmin') {
+        router.push('/orgAdmin/dashboard');
+      } else {
+        setError('Unknown role');
       }
-
-      // Store the token and redirect
-      localStorage.setItem('token', data.token);
-      window.location.href = '/dashboard';
     } catch (err) {
-      setError(err.message);
+      setError('Invalid credentials');
+    } finally {
+    setIsLoading(false);
     }
   };
 
   return (
-    <div className="container mt-5">
-      <h2 className="text-center">Login</h2>
-      {error && <p className="text-center text-danger">{error}</p>}
-      <form onSubmit={handleLogin} className="w-50 mx-auto">
-        <div className="mb-3">
-          <input
+    <Container className="mt-5" style={{ maxWidth: '400px' }}>
+      <h2>Login</h2>
+      {error && <Alert variant="danger">{error}</Alert>}
+      <Form onSubmit={handleLogin}>
+        <Form.Group className="mb-3" controlId="username">
+          <Form.Label>Username</Form.Label>
+          <Form.Control
             type="text"
-            className="form-control"
+            placeholder="Enter username"
             value={username}
             onChange={(e) => setUsername(e.target.value)}
-            placeholder="Username"
             required
           />
-        </div>
-        <div className="mb-3">
-          <input
+        </Form.Group>
+        <Form.Group className="mb-3" controlId="password">
+          <Form.Label>Password</Form.Label>
+          <Form.Control
             type="password"
-            className="form-control"
+            placeholder="Enter password"
             value={password}
             onChange={(e) => setPassword(e.target.value)}
-            placeholder="Password"
             required
           />
-        </div>
-        <button type="submit" className="btn btn-primary w-100">Login</button>
-      </form>
-    </div>
+        </Form.Group>
+        <Button variant="primary" type="submit"disabled={isLoading}>
+          {isLoading ? 'Logging in...' : 'Login'}
+        </Button>
+      </Form>
+    </Container>
   );
 }

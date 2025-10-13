@@ -3,18 +3,23 @@
     "role": "general",
     "username": "Zeeshan Javed",
     "email": "hello@tailgrids.com",
-    "pfp": "/images/profile-pic.png"
+    "pfp": "/images/profile-pic.png",
+    "password": "password123",
+    "enrolledOrgIds": ["1", "2"]
   },
   {
     "role": "superadmin",
     "username": "Super Admin",
     "email": "admin@super.com",
-    "pfp": "/images/profile-pic.png"
+    "pfp": "/images/profile-pic.png",
+    "password": "admin123"
   },
   {
-    "role": "organizationaladmin",
+    "role": "orgadmin",
     "username": "Org Admin",
     "email": "admin@org.com",
-    "pfp": "/images/profile-pic.png"
+    "pfp": "/images/profile-pic.png",
+    "password": "org123",
+    "orgId": "1"
   }
 ]

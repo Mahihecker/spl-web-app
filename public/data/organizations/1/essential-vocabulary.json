@@ -1,0 +1,16 @@
+[
+  {
+    "id": "1",
+    "title": "Hello",
+    "description": "A greeting in sign language",
+    "thumbnail": "thumbnails/hello_essential_thumb.jpg",
+    "signgen_output": null
+  },
+  {
+    "id": "2",
+    "title": "Thank You",
+    "description": "An expression of gratitude",
+    "thumbnail": "thumbnails/thankyou_essential_thumb.jpg",
+    "signgen_output": null
+  }
+]

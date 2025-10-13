@@ -1,7 +1,37 @@
-"use client";
+// src/components/Header.js
+'use client';
 
-export default function Header({ placeholder }) {
-  return (
+import { usePathname } from 'next/navigation';
+import { Navbar, Container, Nav } from 'react-bootstrap';
+import { useAuth } from '../context/AuthContext';
+
+export default function Header({ placeholder = 'Search organizations' }) {
+  const pathname = usePathname();
+  const { user, logout } = useAuth();
+
+  const isPublicPage = ['/', '/login', '/signup'].includes(pathname);
+
+  if (isPublicPage && pathname !== '/') {
+    return null; // No header for login/signup
+  }
+
+  if (isPublicPage) {
+    return (
+      <Navbar bg="light" expand="lg">
+        <Container fluid>
+          <Navbar.Brand href="/">
+            <img src="/images/logo.png" alt="SPL Logo" height="45" />
+          </Navbar.Brand>
+          <Nav>
+            <Nav.Link href="/login">Login</Nav.Link>
+            <Nav.Link href="/signup">Signup</Nav.Link>
+          </Nav>
+        </Container>
+      </Navbar>
+    );
+  }
+
+return (
     <nav
       className="navbar navbar-light w-100"
       style={{
@@ -9,7 +39,7 @@ export default function Header({ placeholder }) {
         boxShadow: '0 4px 6px rgba(0, 0, 0, 0.24)', // Shadow effect
         backdropFilter: 'blur(50px)', // Blur effect
         position: 'relative',
-        zIndex: 1, // Ensure header is above panel
+        zIndex: 10, // Ensure header is above panel
         height: '60px', // Adjusted header height
         padding: '1px 4px 1px 2px', // Adjusted padding for header
       }}
@@ -33,3 +63,4 @@ export default function Header({ placeholder }) {
     </nav>
   );
 }
+

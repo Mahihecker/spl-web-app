@@ -1,0 +1,12 @@
+[
+  {
+    "id": "1",
+    "name": "Lesson 1",
+    "description": "Sample lesson"
+  },
+  {
+    "id": "2",
+    "name": "Lesson 2",
+    "description": "Another lesson"
+  }
+]

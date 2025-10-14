@@ -1,3 +1,4 @@
+// src/app/(general)/layout.js
 'use client';
 
 import { useState } from 'react';
@@ -10,7 +11,6 @@ export default function GeneralLayout({ children }) {
   const [isSidebarOpen, setIsSidebarOpen] = useState(true);
   const { user } = useAuth();
   const sidebarWidth = isSidebarOpen ? '190px' : '55px';
-  
 
   if (!user || user.role !== 'general') {
     return null; // Middleware will redirect
@@ -23,31 +23,29 @@ export default function GeneralLayout({ children }) {
         minHeight: '100vh',
         fontFamily: 'Poppins, sans-serif',
         backgroundColor: '#F8F8F8',
-        overflowX: 'hidden', // Prevent horizontal scroll
+        overflowX: 'hidden',
       }}
     >
-      <Header placeholder="Search organizations" style={{ zIndex: 2}} />
-      <div className="d-flex flex-grow-1">
+      <Header placeholder="Search organizations" style={{ zIndex: 10, top: 0 }} />
+      <div className="d-flex flex-grow-1" style={{ position: 'relative' }}>
         <SidePanel
           isSidebarOpen={isSidebarOpen}
           setIsSidebarOpen={setIsSidebarOpen}
           userRole={user.role}
-          style={{ zIndex: 1 }} // Side panel above banner
+          style={{ zIndex: 1 }}
         />
         <main
           className="flex-grow-1"
           style={{
-            marginLeft: sidebarWidth,
             width: `calc(100% - ${sidebarWidth})`,
             padding: 0,
-            overflowY: 'auto',
             transition: 'margin-left 0.3s ease, width 0.3s ease',
           }}
         >
           {children}
         </main>
       </div>
-      <Footer style={{ zIndex: 2 }} />
+      <Footer style={{ zIndex: 20, position: 'sticky', bottom: 0 }} />
     </div>
   );
 }

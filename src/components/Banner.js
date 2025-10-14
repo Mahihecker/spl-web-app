@@ -49,7 +49,7 @@ export default function Banner() {
         <div
           style={{
             position: 'absolute',
-            top: '129px',
+            top: '119px',
             left: '27px',
             color: '#000000',
             fontFamily: 'Poppins, sans-serif',
@@ -63,7 +63,7 @@ export default function Banner() {
         <div
           style={{
             position: 'absolute',
-            top: '175px',
+            top: '165px',
             left: '27px',
             color: '#000000',
             fontFamily: 'Poppins, sans-serif',

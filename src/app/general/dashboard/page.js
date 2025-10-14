@@ -45,16 +45,32 @@ export default function GeneralDashboard() {
   const canScrollLeft = currentIndex > 0;
   const canScrollRight = currentIndex < totalPages - 1;
   const shouldShowArrows = totalItems > itemsToShow;
+  const splitOrganizationName = (fullName) => {
+    if (!fullName || typeof fullName !== 'string') {
+      return { nameLine1: 'Organization', nameLine2: 'Name' };
+    }
+
+    const words = fullName.trim().split(/\s+/);
+
+    if (words.length > 1) {
+      const nameLine2 = words[words.length - 1]; // Last word
+      const nameLine1 = words.slice(0, -1).join(' '); // Everything before last word
+      return { nameLine1, nameLine2 };
+    }
+
+    // If only one word, put it in nameLine1
+    return { nameLine1: fullName, nameLine2: '' };
+  };
 
   const handleScrollLeft = () => {
     if (canScrollLeft) {
-      setCurrentIndex(currentIndex - 1);
+      setCurrentIndex(currentIndex - 2);
     }
   };
 
   const handleScrollRight = () => {
     if (canScrollRight) {
-      setCurrentIndex(currentIndex + 1);
+      setCurrentIndex(currentIndex + 2);
     }
   };
 
@@ -66,10 +82,9 @@ export default function GeneralDashboard() {
       {/* Organizations Section */}
       <Container
         fluid
-        className="p-4"
-        style={{ position: 'relative', zIndex: 3 }}
+        style={{ position: 'relative', zIndex: 3,padding: '10px 0 5px 23px' }}
       >
-        <span style={{ fontWeight: 500, fontSize: '25px' }}>Organizations</span>
+        <span style={{ fontWeight: 600, fontSize: '25px' }}>Organizations</span>
         {error && <Alert variant="danger">{error}</Alert>}
         {loading ? (
           <p>Loading organizations...</p>
@@ -102,6 +117,7 @@ export default function GeneralDashboard() {
               style={{
                 overflow: 'hidden',
                 padding: shouldShowArrows ? '0 60px' : '0 20px',
+                alignItems: 'center',
               }}
             >
               <div
@@ -109,14 +125,12 @@ export default function GeneralDashboard() {
                   display: 'flex',
                   transition: 'transform 0.3s ease-in-out',
                   transform: `translateX(-${currentIndex * (100 / itemsToShow)}%)`,
-                  gap: '20px',
+                  gap: '20px'
                 }}
               >
                 {Array.isArray(orgs) && orgs.length > 0 ? (
                   orgs.map((org, index) => {
-                    const nameParts = org.name ? org.name.trim().split(' ') : ['No', 'Name'];
-                    const nameLine1 = nameParts.length > 1 ? nameParts[0] : org.name || 'No';
-                    const nameLine2 = nameParts.length > 1 ? nameParts.slice(1).join(' ') : 'Name';
+                    const { nameLine1, nameLine2 } = splitOrganizationName(org.name);
                     return (
                       <div
                         key={org.id}
@@ -168,11 +182,6 @@ export default function GeneralDashboard() {
               </Button>
             )}
           </div>
-        )}
-        {process.env.NODE_ENV === 'development' && (
-          <small style={{ color: '#666' }}>
-            Showing {currentIndex + 1}/{totalPages} | Total: {totalItems} orgs
-          </small>
         )}
       </Container>
     </div>

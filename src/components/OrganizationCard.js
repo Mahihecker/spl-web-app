@@ -7,25 +7,24 @@ const OrganizationCard = ({ logoUrl, nameLine1, nameLine2 }) => {
         display: 'flex',
         alignItems: 'center',
         backgroundColor: '#ffffff',
-        borderRadius: '8px',
+        borderRadius: '6px',
         boxShadow: '0 2px 4px rgba(0, 0, 0, 0.1)',
-        padding: '16px',
-        width: '100%',
-        maxWidth: '400px',
+        padding: '30px', // Increased padding to accommodate larger height
+        width: '390px',
+        height: '166px',
         margin: '10px auto',
-        height: '80px',
       }}
     >
       {/* Logo Section */}
       <div
         style={{
           flex: '0 0 auto',
-          width: '64px',
-          height: '64px',
+          width: '124px',
+          height: '124px',
           display: 'flex',
           alignItems: 'center',
           justifyContent: 'center',
-          marginRight: '16px',
+          marginRight: '30px', // Gap between img and purple bar
         }}
       >
         <img
@@ -39,29 +38,31 @@ const OrganizationCard = ({ logoUrl, nameLine1, nameLine2 }) => {
         />
       </div>
 
-      {/* Purple Separator Bar */}
+      {/* Purple Separator Bar - 6px width, center aligned */}
       <div
         style={{
-          width: '2px',
+          width: '4px',
           height: '48px',
           backgroundColor: '#5437ED',
-          marginRight: '16px',
+          marginRight: '30px', // Gap between purple bar and text
+          alignSelf: 'center', // Center align the bar vertically
         }}
       />
 
-      {/* Organization Name Section */}
+      {/* Organization Name Section - Left aligned */}
       <div
         style={{
           flex: 1,
           display: 'flex',
           flexDirection: 'column',
           justifyContent: 'center',
+          textAlign: 'left', // Explicit left alignment
         }}
       >
         <span
           style={{
             fontFamily: 'Poppins, sans-serif',
-            fontSize: '16px',
+            fontSize: '20px',
             fontWeight: 600,
             color: '#333333',
             lineHeight: '1.2',
@@ -72,7 +73,7 @@ const OrganizationCard = ({ logoUrl, nameLine1, nameLine2 }) => {
         <span
           style={{
             fontFamily: 'Poppins, sans-serif',
-            fontSize: '14px',
+            fontSize: '20px',
             fontWeight: 600,
             color: '#5437ED',
             lineHeight: '1.2',

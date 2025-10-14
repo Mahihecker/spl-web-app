@@ -5,7 +5,7 @@ import SidePanelContent from './SidePanelContent';
 export default function SidePanel({ isSidebarOpen, setIsSidebarOpen, userRole, style }) {
   return (
     <div
-      className="bg-white sidebar border-end position-fixed"
+      className="bg-white sidebar border-end position-sticky"
       style={{
         ...style,
         overflow: 'hidden',
@@ -23,6 +23,7 @@ export default function SidePanel({ isSidebarOpen, setIsSidebarOpen, userRole, s
           top: '43px',
           right: '16px',
           cursor: 'pointer',
+          zIndex: 2,
         }}
         onClick={() => setIsSidebarOpen(!isSidebarOpen)}
       >

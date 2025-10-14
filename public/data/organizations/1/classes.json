@@ -1,10 +1,97 @@
 [
   {
     "id": "1",
-    "name": "Grade 5"
+    "name": "Grade 5",
+    "Subjects_total": "20"
   },
   {
     "id": "2",
-    "name": "Grade 6"
+    "name": "Grade 6",
+    "Subjects_total": "30"
+  },
+  {
+    "id": "3",
+    "name": "Grade 6",
+    "Subjects_total": "30"
+  },
+  {
+    "id": "4",
+    "name": "Grade 6",
+    "Subjects_total": "30"
+  },
+  {
+    "id": "5",
+    "name": "Grade 6",
+    "Subjects_total": "30"
+  },
+  {
+    "id": "6",
+    "name": "Grade 6",
+    "Subjects_total": "30"
+  },
+  {
+    "id": "7",
+    "name": "Grade 6",
+    "Subjects_total": "30"
+  },
+  {
+    "id": "8",
+    "name": "Grade 6",
+    "Subjects_total": "30"
+  },
+  {
+    "id": "9",
+    "name": "Grade 6",
+    "Subjects_total": "30"
+  },
+  {
+    "id": "10",
+    "name": "Grade 6",
+    "Subjects_total": "30"
+  },
+  {
+    "id": "11",
+    "name": "Grade 6",
+    "Subjects_total": "30"
+  },
+  {
+    "id": "12",
+    "name": "Grade 6",
+    "Subjects_total": "30"
+  },
+  {
+    "id": "13",
+    "name": "Grade 6",
+    "Subjects_total": "30"
+  },
+  {
+    "id": "14",
+    "name": "Grade 6",
+    "Subjects_total": "30"
+  },
+  {
+    "id": "15",
+    "name": "Grade 6",
+    "Subjects_total": "30"
+  },
+  {
+    "id": "16",
+    "name": "Grade 6",
+    "Subjects_total": "30"
+  },
+  {
+    "id": "17",
+    "name": "Grade 6",
+    "Subjects_total": "30"
+  },
+  {
+    "id": "18",
+    "name": "Grade 6",
+    "Subjects_total": "30"
+  },
+  {
+    "id": "19",
+    "name": "Grade 6",
+    "Subjects_total": "30"
   }
 ]

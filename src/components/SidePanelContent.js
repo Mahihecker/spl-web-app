@@ -96,7 +96,7 @@ export default function SidePanelContent({ isSidebarOpen, userRole }) {
               }}
             >
               <a
-                href="/favourites"
+                href="/general/dashboard/favorites"
                 className="nav-link d-flex align-items-center text-dark"
                 style={{
                   textDecoration: 'none',
@@ -113,7 +113,7 @@ export default function SidePanelContent({ isSidebarOpen, userRole }) {
                 />
                 {isSidebarOpen && <span className="ms-0" style={{ lineHeight: '21px' }}>Favourites</span>}
               </a>
-              {(pathname === '/favourites') && (
+              {(pathname === '/general/dashboard/favorites') && (
                 <span
                   style={{
                     position: 'absolute',

@@ -170,7 +170,7 @@ export default function GeneralDashboard() {
                           minWidth: 0,
                         }}
                       >
-                        <Link href={`/general/org/${org.id}`} style={{ textDecoration: 'none', color: 'inherit' }}>
+                        <Link href={`/general/dashboard/${org.id}`} style={{ textDecoration: 'none', color: 'inherit' }}>
                           <OrganizationCard
                             logoUrl={org.image || '/images/default-logo.png'}
                             nameLine1={nameLine1}

@@ -1,22 +1,22 @@
-"use client";
+'use client';
 
 import SidePanelContent from './SidePanelContent';
 
-export default function SidePanel({ isSidebarOpen, setIsSidebarOpen, userRole }) {
+export default function SidePanel({ isSidebarOpen, setIsSidebarOpen, userRole, style }) {
   return (
     <div
-      className="bg-white sidebar border-end position-relative transition-all d-flex flex-column"
+      className="bg-white sidebar border-end position-fixed"
       style={{
+        ...style,
         overflow: 'hidden',
         height: 'calc(100vh - 60px)',
         width: isSidebarOpen ? '190px' : '55px',
         paddingLeft: '2px',
         transition: 'width 0.3s ease',
-        position: 'absolute',
-        zIndex: 1,
+        top: '60px', // Below header
+        left: 0,
       }}
     >
-      {/* Toggle Icon */}
       <div
         className="position-absolute"
         style={{
@@ -32,10 +32,7 @@ export default function SidePanel({ isSidebarOpen, setIsSidebarOpen, userRole })
           style={{ width: '19px', height: '19px', transition: 'transform 0.3s ease' }}
         />
       </div>
-
       <SidePanelContent isSidebarOpen={isSidebarOpen} userRole={userRole} />
     </div>
   );
 }
-
-

@@ -1,11 +1,10 @@
 [
   {
     "role": "general",
-    "username": "Zeeshan Javed",
+    "username": "Zeeshan Javedddddddd",
     "email": "hello@tailgrids.com",
     "pfp": "/images/profile-pic.png",
-    "password": "password123",
-    "enrolledOrgIds": ["1", "2"]
+    "password": "password123"
   },
   {
     "role": "superadmin",

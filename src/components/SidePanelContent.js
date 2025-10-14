@@ -7,6 +7,12 @@ import Link from 'next/link';
 export default function SidePanelContent({ isSidebarOpen, userRole }) {
   const pathname = usePathname();
   const { user, logout } = useAuth();
+  const truncateText = (text, maxLength) => {
+    if (text && text.length > maxLength) {
+      return text.substring(0, maxLength - 3) + '...';
+    }
+    return text;
+  };
 
   // Debugging: Log user data to verify it's available
   console.log('User data in SidePanelContent:', user);
@@ -184,23 +190,36 @@ export default function SidePanelContent({ isSidebarOpen, userRole }) {
         <Link
           href={`/${user.role}/profile`}
           className="nav-link d-flex align-items-center text-dark"
-          style={{ textDecoration: 'none', marginTop: '20px' }} // Adds 20px gap between logout and profile
+          style={{ textDecoration: 'none', marginTop: '20px' }}
         >
           <div className="d-flex align-items-center" style={{ marginLeft: '5px' }}>
-            <img src={user.pfp} alt="Profile" className="rounded-circle" width="35" />
+            <img
+              src={user.pfp}
+              alt="Profile"
+              className="rounded-circle"
+              width="35"
+              style={{ flexShrink: 0 }}
+            />
             {isSidebarOpen && (
-              <div style={{ maxWidth: '140px', overflow: 'hidden', marginLeft: '11px' }}>
+              <div
+                style={{
+                  maxWidth: '140px',
+                  overflow: 'hidden',
+                  marginLeft: '8px',
+                  flexShrink: 1,
+                }}
+              >
                 <p
                   className="text-muted mb-0"
                   style={{
                     fontWeight: 'bold',
-                    fontSize: '14px',
+                    fontSize: '12px',
                     whiteSpace: 'nowrap',
                     overflow: 'hidden',
                     textOverflow: 'ellipsis',
                   }}
                 >
-                  {user.username || 'No Username'}
+                  {truncateText(user.username || 'No Username', 13)}
                 </p>
                 <p
                   className="text-muted mb-0"
@@ -216,7 +235,7 @@ export default function SidePanelContent({ isSidebarOpen, userRole }) {
               </div>
             )}
           </div>
-          {(pathname === `/${user.role}/profile`) && (
+          {pathname === `/${user.role}/profile` && (
             <span
               style={{
                 position: 'absolute',

@@ -3,14 +3,94 @@
     "id": "1",
     "title": "Introduction",
     "description": "Basic intro",
-    "thumbnail": "thumbnails/intro_thumb.jpg",
-    "signgen_output": null
+    "thumbnail": "/images/sun_thumb.jpg",
+    "signgen_output": null,
+    "favorite": true
   },
   {
     "id": "2",
     "title": "Details",
     "description": "In-depth explanation",
-    "thumbnail": "thumbnails/details_thumb.jpg",
-    "signgen_output": null
+    "thumbnail": "/images/sun_thumb.jpg",
+    "signgen_output": null,
+    "favorite": true
+  },
+  {
+    "id": "3",
+    "title": "Summary",
+    "description": "Key takeaways",
+    "thumbnail": "/images/sun_thumb.jpg",
+    "signgen_output": null,
+    "favorite": false
+  },
+  {
+    "id": "4",
+    "title": "Quiz",
+    "description": "Test your knowledge",
+    "thumbnail": "/images/sun_thumb.jpg",
+    "signgen_output": null,
+    "favorite": false
+  },
+  {
+    "id": "5",
+    "title": "Conclusion",
+    "description": "Wrapping up",
+    "thumbnail": "/images/sun_thumb.jpg",
+    "signgen_output": null,
+    "favorite": true
+  }, {
+    "id": "6",
+    "title": "Resources",
+    "description": "Additional materials",
+    "thumbnail": "/images/sun_thumb.jpg",
+    "signgen_output": null,
+    "favorite": false
+  }, {
+    "id": "7",
+    "title": "Feedback",
+    "description": "Your thoughts",
+    "thumbnail": "/images/sun_thumb.jpg",
+    "signgen_output": null,
+    "favorite": true
+  },
+  {
+    "id": "8",
+    "title": "Next Steps",
+    "description": "Where to go from here",
+    "thumbnail": "/images/sun_thumb.jpg",
+    "signgen_output": null,
+    "favorite": false
+  },
+  {
+    "id": "9",
+    "title": "Appendix",
+    "description": "Supplementary info",
+    "thumbnail": "/images/sun_thumb.jpg",
+    "signgen_output": null,
+    "favorite": true
+  },
+  {
+    "id": "10",
+    "title": "Glossary",
+    "description": "Key terms",
+    "thumbnail": "/images/sun_thumb.jpg",
+    "signgen_output": null,
+    "favorite": false
+  },
+  {
+    "id": "11",
+    "title": "Acknowledgments",
+    "description": "Credits and thanks",
+    "thumbnail": "/images/sun_thumb.jpg",
+    "signgen_output": null,
+    "favorite": true
+  },
+  {
+    "id": "12",
+    "title": "Contact Info",
+    "description": "Get in touch",
+    "thumbnail": "/images/sun_thumb.jpg",
+    "signgen_output": null,
+    "favorite": false
   }
 ]

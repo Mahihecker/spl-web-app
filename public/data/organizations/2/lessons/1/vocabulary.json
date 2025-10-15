@@ -3,14 +3,96 @@
     "id": "1",
     "title": "World",
     "description": "The planet we live on",
-    "thumbnail": "thumbnails/world_thumb.jpg",
-    "signgen_output": null
+    "thumbnail": "/images/world_thumb.jpg",
+    "signgen_output": null,
+    "favorite": true
   },
   {
     "id": "2",
     "title": "Sun",
     "description": "The star at the center",
-    "thumbnail": "thumbnails/sun_thumb.jpg",
-    "signgen_output": null
+    "thumbnail": "/images/sun_thumb.jpg",
+    "signgen_output": null,
+    "favorite": false
+  },
+  {
+    "id": "3",
+    "title": "World",
+    "description": "The planet we live on",
+    "thumbnail": "/images/world_thumb.jpg",
+    "signgen_output": null,
+    "favorite": true
+  },
+  {
+    "id": "4",
+    "title": "Sun",
+    "description": "The star at the center",
+    "thumbnail": "/images/sun_thumb.jpg",
+    "signgen_output": null,
+    "favorite": false
+  },
+  {
+    "id": "5",
+    "title": "World",
+    "description": "The planet we live on",
+    "thumbnail": "/images/world_thumb.jpg",
+    "signgen_output": null,
+    "favorite": true
+  },
+  {
+    "id": "6",
+    "title": "Sun",
+    "description": "The star at the center",
+    "thumbnail": "/images/sun_thumb.jpg",
+    "signgen_output": null,
+    "favorite": false
+  },
+  {
+    "id": "7",
+    "title": "World",
+    "description": "The planet we live on",
+    "thumbnail": "/images/world_thumb.jpg",
+    "signgen_output": null,
+    "favorite": true
+  },
+  {
+    "id": "8",
+    "title": "Sun",
+    "description": "The star at the center",
+    "thumbnail": "/images/sun_thumb.jpg",
+    "signgen_output": null,
+    "favorite": false
+  },
+  {
+    "id": "9",
+    "title": "World",
+    "description": "The planet we live on",
+    "thumbnail": "/images/world_thumb.jpg",
+    "signgen_output": null,
+    "favorite": true
+  },
+  {
+    "id": "10",
+    "title": "Sun",
+    "description": "The star at the center",
+    "thumbnail": "/images/sun_thumb.jpg",
+    "signgen_output": null,
+    "favorite": false
+  },
+  {
+    "id": "11",
+    "title": "World",
+    "description": "The planet we live on",
+    "thumbnail": "/images/world_thumb.jpg",
+    "signgen_output": null,
+    "favorite": true
+  },
+  {
+    "id": "12",
+    "title": "Sun",
+    "description": "The star at the center",
+    "thumbnail": "/images/sun_thumb.jpg",
+    "signgen_output": null,
+    "favorite": false
   }
 ]

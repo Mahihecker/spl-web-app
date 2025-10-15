@@ -1,74 +1,113 @@
-'use client';
-import { useParams } from 'next/navigation';
-import ClassTab from '@/components/ClassTab';
-import EssentialVocabTab from '@/components/EssentialVocabTab';
+"use client";
+import { useEffect, useState } from "react";
+import { useSearch } from "../../../../context/SearchContext";
+import CourseCardGrid from "../../../../components/CourseCardGrid";
 
-export default function OrgDashboard() {
-  const params = useParams();
+export default function OrgDashboard({ params }) {
   const { orgId } = params;
+  const { searchTerm, isSearching } = useSearch();
+  const [orgName, setOrgName] = useState("Organization");
+  const [classesData, setClassesData] = useState([]);
+  const [vocabData, setVocabData] = useState([]);
+  const [filteredClasses, setFilteredClasses] = useState([]);
+  const [error, setError] = useState("");
+  const [loading, setLoading] = useState(true);
 
-  // Data fetching logic remains the same
-  const classesData = require(`/public/data/organizations/${orgId}/classes.json`);
-  const vocabData = require(`/public/data/organizations/${orgId}/essential-vocabulary.json`);
-  const orgData = require('/public/data/organizations.json').find(
-    (org) => org.id === parseInt(orgId)
-  );
+  // Fetch organization data, classes, and vocabulary
+  useEffect(() => {
+    async function loadData() {
+      try {
+        setLoading(true);
+        const baseUrl =
+          process.env.NEXT_PUBLIC_BASE_URL ||
+          (process.env.VERCEL_URL
+            ? `https://${process.env.VERCEL_URL}`
+            : "http://localhost:3000");
 
-  // Separate the first two classes from the rest
-  const firstTwoClasses = classesData.slice(0, 2);
-  const remainingClasses = classesData.slice(2);
+        console.log("baseUrl:", baseUrl);
+        console.log("orgId:", orgId);
+
+        // Fetch all organizations
+        const orgRes = await fetch(`${baseUrl}/data/organizations.json`, {
+          cache: "no-store",
+        });
+        if (!orgRes.ok) {
+          throw new Error(`Failed to fetch organizations: ${orgRes.status} ${orgRes.statusText}`);
+        }
+        const orgData = await orgRes.json();
+        console.log("orgData:", orgData);
+
+        // Find organization by orgId
+        const organization = Array.isArray(orgData)
+          ? orgData.find((org) => org.id === orgId || org.id.toString() === orgId)
+          : null;
+        if (!organization) {
+          throw new Error(`Organization with ID ${orgId} not found in organizations.json`);
+        }
+
+        // Fetch classes
+        const classesRes = await fetch(
+          `${baseUrl}/data/organizations/${orgId}/classes.json`,
+          { cache: "no-store" }
+        );
+        if (!classesRes.ok) {
+          throw new Error(`Failed to fetch classes: ${classesRes.status} ${classesRes.statusText}`);
+        }
+        const classes = await classesRes.json();
+        console.log("classesData:", classes);
+
+        // Fetch vocabulary
+        const vocabRes = await fetch(
+          `${baseUrl}/data/organizations/${orgId}/essential-vocabulary.json`,
+          { cache: "no-store" }
+        );
+        if (!vocabRes.ok) {
+          throw new Error(`Failed to fetch vocabulary: ${vocabRes.status} ${vocabRes.statusText}`);
+        }
+        const vocab = await vocabRes.json();
+        console.log("vocabData:", vocab);
+
+        // Set data with validation
+        setOrgName(typeof organization.name === "string" ? organization.name : "Organization");
+        setClassesData(Array.isArray(classes) ? classes : []);
+        setVocabData(Array.isArray(vocab.words) ? vocab.words : Array.isArray(vocab) ? vocab : []);
+        setFilteredClasses(Array.isArray(classes) ? classes : []);
+      } catch (err) {
+        setError(`Error: ${err.message}`);
+        console.error("Fetch error:", err);
+      } finally {
+        setLoading(false);
+      }
+    }
+    loadData();
+  }, [orgId]);
+
+  // Filter classes based on search term
+  useEffect(() => {
+    if (!isSearching || !searchTerm) {
+      setFilteredClasses(classesData);
+      return;
+    }
+
+    const filtered = classesData.filter(
+      (cls) =>
+        cls.name &&
+        typeof cls.name === "string" &&
+        cls.name.toLowerCase().includes(searchTerm.toLowerCase())
+    );
+    setFilteredClasses(filtered);
+    console.log("filteredClasses:", filtered);
+  }, [searchTerm, isSearching, classesData]);
 
   return (
-    <div
-      className="p-6"
-      style={{
-        height: 'calc(100vh - 120px)', // between header and footer
-        overflowY: 'auto', // internal scroll
-      }}
-    >
-      <h1 className="text-2xl font-bold mb-6">{orgData.name}</h1>
-
-      {/* REVISED GRID: Using 'grid-cols-1' by default and 'lg:grid-cols-3'
-        to explicitly enforce 3 columns on larger screens (where the 1000px max-width applies).
-      */}
-      <div
-        className="grid gap-1 justify-center grid-cols-1 sm:grid-cols-2 lg:grid-cols-3" 
-        style={{
-          maxWidth: '1000px',
-          margin: '0 auto',
-        }}
-      >
-        {/* ======================= FIRST ROW (3 CARDS) ======================= */}
-        
-        {/* 1. Essential Vocabulary Card */}
-        <EssentialVocabTab
-          title="Essential Vocabulary"
-          count={vocabData.length}
-          description={`${vocabData.length} Words`}
-        />
-
-        {/* 2. & 3. First two Class Cards */}
-        {firstTwoClasses.map((classItem) => (
-          <ClassTab
-            key={classItem.id}
-            title={classItem.name}
-            count={classItem.Subjects_total}
-            description={`${classItem.Subjects_total} Subjects`}
-          />
-        ))}
-
-        {/* ======================= REMAINING ROWS (3 CARDS EACH) ======================= */}
-        
-        {/* Remaining Class Cards (Start on the second row) */}
-        {remainingClasses.map((classItem) => (
-          <ClassTab
-            key={classItem.id}
-            title={classItem.name}
-            count={classItem.Subjects_total}
-            description={`${classItem.Subjects_total} Subjects`}
-          />
-        ))}
-      </div>
+    <div className="p-3 d-flex flex-column" style={{ marginTop: "20px" }}>
+      <h1 className="mb-4" style={{ fontSize: "20px", fontWeight: 600 }}>{orgName}</h1>
+      {error && <div className="text-danger mb-2">{error}</div>}
+      {loading ? (
+        <p>Loading...</p>
+      ) : (
+        <CourseCardGrid vocabData={vocabData} classesData={filteredClasses} orgId={orgId} />
+      )}
     </div>
   );
 }

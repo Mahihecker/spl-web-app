@@ -5,19 +5,18 @@ import { useSearch } from "../../../../../../context/SearchContext";
 import SubjectsGrid from "../../../../../../components/SubjectsGrid";
 import { useRouter } from "next/navigation";
 
-export default function SubjectDetails({ params }) {
-  const { orgId, classId, subjectId } = use(params);
+export default function ClassSubjects({ params }) {
+  const { orgId, classId } = use(params);
   const router = useRouter();
   const { searchTerm, isSearching } = useSearch();
   const [orgName, setOrgName] = useState("Organization");
   const [className, setClassName] = useState("Class");
-  const [subjectName, setSubjectName] = useState("Subject");
-  const [lessonsData, setLessonsData] = useState([]);
-  const [filteredLessons, setFilteredLessons] = useState([]);
+  const [subjectsData, setSubjectsData] = useState([]);
+  const [filteredSubjects, setFilteredSubjects] = useState([]);
   const [error, setError] = useState("");
   const [loading, setLoading] = useState(true);
 
-  // Fetch organization, class, subject, and lessons data
+  // Fetch organization, class data, and subjects
   useEffect(() => {
     async function loadData() {
       try {
@@ -31,7 +30,6 @@ export default function SubjectDetails({ params }) {
         console.log("baseUrl:", baseUrl);
         console.log("orgId:", orgId);
         console.log("classId:", classId);
-        console.log("subjectId:", subjectId);
 
         // Fetch all organizations
         const orgRes = await fetch(`${baseUrl}/data/organizations.json`, {
@@ -72,7 +70,7 @@ export default function SubjectDetails({ params }) {
         }
         setClassName(typeof currentClass.name === "string" ? currentClass.name : "Class");
 
-        // Fetch subjects to get subject name
+        // Fetch subjects
         const subjectsRes = await fetch(
           `${baseUrl}/data/organizations/${orgId}/classes/${classId}/subjects.json`,
           { cache: "no-store" }
@@ -83,28 +81,9 @@ export default function SubjectDetails({ params }) {
         const subjects = await subjectsRes.json();
         console.log("subjectsData:", subjects);
 
-        const currentSubject = Array.isArray(subjects)
-          ? subjects.find((sub) => sub.id === subjectId || sub.id.toString() === subjectId)
-          : null;
-        if (!currentSubject) {
-          throw new Error(`Subject with ID ${subjectId} not found in subjects.json`);
-        }
-        setSubjectName(typeof currentSubject.name === "string" ? currentSubject.name : "Subject");
-
-        // Fetch lessons
-        const lessonsRes = await fetch(
-          `${baseUrl}/data/organizations/${orgId}/classes/${classId}/subjects/${subjectId}/lessons.json`,
-          { cache: "no-store" }
-        );
-        if (!lessonsRes.ok) {
-          throw new Error(`Failed to fetch lessons: ${lessonsRes.status} ${lessonsRes.statusText}`);
-        }
-        const lessons = await lessonsRes.json();
-        console.log("lessonsData:", lessons);
-
         // Set data with validation
-        setLessonsData(Array.isArray(lessons) ? lessons : []);
-        setFilteredLessons(Array.isArray(lessons) ? lessons : []);
+        setSubjectsData(Array.isArray(subjects) ? subjects : []);
+        setFilteredSubjects(Array.isArray(subjects) ? subjects : []);
       } catch (err) {
         setError(`Error: ${err.message}`);
         console.error("Fetch error:", err);
@@ -113,24 +92,24 @@ export default function SubjectDetails({ params }) {
       }
     }
     loadData();
-  }, [orgId, classId, subjectId]);
+  }, [orgId, classId]);
 
-  // Filter lessons based on search term
+  // Filter subjects based on search term
   useEffect(() => {
     if (!isSearching || !searchTerm) {
-      setFilteredLessons(lessonsData);
+      setFilteredSubjects(subjectsData);
       return;
     }
 
-    const filtered = lessonsData.filter(
-      (lesson) =>
-        lesson.name &&
-        typeof lesson.name === "string" &&
-        lesson.name.toLowerCase().includes(searchTerm.toLowerCase())
+    const filtered = subjectsData.filter(
+      (subject) =>
+        subject.name &&
+        typeof subject.name === "string" &&
+        subject.name.toLowerCase().includes(searchTerm.toLowerCase())
     );
-    setFilteredLessons(filtered);
-    console.log("filteredLessons:", filtered);
-  }, [searchTerm, isSearching, lessonsData]);
+    setFilteredSubjects(filtered);
+    console.log("filteredSubjects:", filtered);
+  }, [searchTerm, isSearching, subjectsData]);
 
   return (
     <div className="d-flex flex-column h-100 p-3">
@@ -164,50 +143,8 @@ export default function SubjectDetails({ params }) {
           }}>
             &rsaquo;
           </li>
-          <li className="breadcrumb-item">
-            <a 
-              href={`/general/dashboard/${orgId}/${classId}`} 
-              style={{ 
-                textDecoration: "none", 
-                color: "#5437ED", 
-                marginRight: "8px" 
-              }}
-            >
-              {className}
-            </a>
-          </li>
-          <li style={{ 
-            margin: "0 8px", 
-            color: "#808080", 
-            fontSize: "20px", 
-            borderRadius: "4px", 
-            padding: "0 4px" 
-          }}>
-            &rsaquo;
-          </li>
-          <li className="breadcrumb-item">
-            <a 
-              href={`/general/dashboard/${orgId}/${classId}/subjects/${subjectId}`} 
-              style={{ 
-                textDecoration: "none", 
-                color: "#5437ED", 
-                marginRight: "8px" 
-              }}
-            >
-              {subjectName}
-            </a>
-          </li>
-          <li style={{ 
-            margin: "0 8px", 
-            color: "#808080", 
-            fontSize: "20px", 
-            borderRadius: "4px", 
-            padding: "0 4px" 
-          }}>
-            &rsaquo;
-          </li>
           <li className="breadcrumb-item active" aria-current="page" style={{ color: "#000", marginLeft: "8px" }}>
-            Lessons
+            {className}
           </li>
         </ol>
       </nav>
@@ -216,7 +153,7 @@ export default function SubjectDetails({ params }) {
         <p>Loading...</p>
       ) : (
         <div className="flex-grow-1 overflow-y-auto" style={{ maxHeight: "calc(100vh - 180px)", overflowX: "hidden", marginLeft: "20px" }}>
-          <SubjectsGrid subjectsData={filteredLessons} orgId={orgId} classId={classId} />
+          <SubjectsGrid subjectsData={filteredSubjects} orgId={orgId} classId={classId} />
         </div>
       )}
     </div>

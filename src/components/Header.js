@@ -1,13 +1,13 @@
 // src/components/Header.js
-'use client';
+"use client";
 
-import { useState, useRef, useEffect } from 'react';
-import { usePathname } from 'next/navigation';
-import { Navbar, Container, Nav } from 'react-bootstrap';
-import { useAuth } from '../context/AuthContext';
-import { useSearch } from '../context/SearchContext';
+import { useState, useRef, useEffect } from "react";
+import { usePathname } from "next/navigation";
+import { Navbar, Container, Nav } from "react-bootstrap";
+import { useAuth } from "../context/AuthContext";
+import { useSearch } from "../context/SearchContext";
 
-export default function Header({ placeholder = 'Search organizations' }) {
+export default function Header({ placeholder = "Search organizations" }) {
   const pathname = usePathname();
   const { user, logout } = useAuth();
   const { searchTerm, setSearchTerm, searchableData, isSearching, setIsSearching } = useSearch();
@@ -16,25 +16,30 @@ export default function Header({ placeholder = 'Search organizations' }) {
   const inputRef = useRef(null);
   const dropdownRef = useRef(null);
 
-  const isPublicPage = ['/', '/login', '/signup'].includes(pathname);
+  const isPublicPage = ["/", "/login", "/signup"].includes(pathname);
 
   // Handle click outside to close suggestions
   useEffect(() => {
     function handleClickOutside(event) {
-      if (inputRef.current && !inputRef.current.contains(event.target) &&
-          dropdownRef.current && !dropdownRef.current.contains(event.target)) {
+      if (
+        inputRef.current &&
+        !inputRef.current.contains(event.target) &&
+        dropdownRef.current &&
+        !dropdownRef.current.contains(event.target)
+      ) {
         setShowSuggestions(false);
       }
     }
-    document.addEventListener('mousedown', handleClickOutside);
-    return () => document.removeEventListener('mousedown', handleClickOutside);
+    document.addEventListener("mousedown", handleClickOutside);
+    return () => document.removeEventListener("mousedown", handleClickOutside);
   }, []);
 
   const suggestions = searchableData
-    .filter(item => 
-      item.name && 
-      item.name.toLowerCase().includes(searchTerm.toLowerCase()) &&
-      searchTerm.length > 0
+    .filter(
+      (item) =>
+        item.name &&
+        item.name.toLowerCase().includes(searchTerm.toLowerCase()) &&
+        searchTerm.length > 0
     )
     .slice(0, 5);
 
@@ -49,17 +54,16 @@ export default function Header({ placeholder = 'Search organizations' }) {
     setSearchTerm(suggestion.name);
     setShowSuggestions(false);
     setIsSearching(true);
-    // Focus back to input
     inputRef.current?.focus();
   };
 
   const handleClearSearch = () => {
-    setSearchTerm('');
+    setSearchTerm("");
     setShowSuggestions(false);
     setIsSearching(false);
   };
 
-  if (isPublicPage && pathname !== '/') {
+  if (isPublicPage && pathname !== "/") {
     return null;
   }
 
@@ -68,12 +72,20 @@ export default function Header({ placeholder = 'Search organizations' }) {
       <Navbar bg="light" expand="lg">
         <Container fluid>
           <Navbar.Brand href="/">
-            <img src="/images/logo.png" alt="SPL Logo" height="45" />
+            <img
+              src="/images/logo.png"
+              alt="SPL Logo"
+              height="45"
+              className="d-inline-block align-top"
+            />
           </Navbar.Brand>
-          <Nav>
-            <Nav.Link href="/login">Login</Nav.Link>
-            <Nav.Link href="/signup">Signup</Nav.Link>
-          </Nav>
+          <Navbar.Toggle aria-controls="basic-navbar-nav" />
+          <Navbar.Collapse id="basic-navbar-nav">
+            <Nav className="ms-auto">
+              <Nav.Link href="/login">Login</Nav.Link>
+              <Nav.Link href="/signup">Signup</Nav.Link>
+            </Nav>
+          </Navbar.Collapse>
         </Container>
       </Navbar>
     );
@@ -83,27 +95,52 @@ export default function Header({ placeholder = 'Search organizations' }) {
     <nav
       className="navbar navbar-light w-100"
       style={{
-        backgroundColor: '#ffffff',
-        boxShadow: '0 4px 6px rgba(0, 0, 0, 0.24)',
-        backdropFilter: 'blur(50px)',
-        position: 'relative',
+        backgroundColor: "#ffffff",
+        boxShadow: "0 4px 6px rgba(0, 0, 0, 0.24)",
+        backdropFilter: "blur(50px)",
+        position: "relative",
         zIndex: 10,
-        height: '60px',
-        padding: '1px 4px 1px 2px',
+        height: "60px",
+        padding: "1px 4px 1px 2px",
       }}
     >
-      <div className="container-fluid">
+      <div className="container-fluid d-flex justify-content-between align-items-center">
         <a className="navbar-brand" href="/">
-          <img src="/images/logo.png" alt="SPL Logo" height="45px" />
+          <img
+            src="/images/logo.png"
+            alt="SPL Logo"
+            height="45"
+            className="d-block"
+            style={{
+              maxHeight: "45px",
+              width: "auto",
+              [window.innerWidth < 768 ? "maxHeight" : ""]: "30px", // Reduce on mobile
+            }}
+          />
         </a>
-        <div className="input-group position-relative" style={{ width: '374px', height: '32px' }}>
-          <span className="input-group-text" style={{ 
-            backgroundColor: '#ffffff', 
-            borderColor: '#A2A2A2', 
-            padding: '0 8px', 
-            borderRight: 'none' 
-          }}>
-            <img src="/images/search-icon.png" alt="Search" style={{ width: '15px', height: '15px' }} />
+        <div
+          className="input-group position-relative"
+          style={{
+            width: "374px",
+            height: "32px",
+            [window.innerWidth < 768 ? "width" : ""]: "100%", // Full width on mobile
+          }}
+        >
+          <span
+            className="input-group-text"
+            style={{
+              backgroundColor: "#ffffff",
+              borderColor: "#A2A2A2",
+              padding: "0 8px",
+              borderRight: "none",
+              [window.innerWidth < 768 ? "display" : ""]: "none", // Hide on mobile if needed
+            }}
+          >
+            <img
+              src="/images/search-icon.png"
+              alt="Search"
+              style={{ width: "15px", height: "15px" }}
+            />
           </span>
           <input
             ref={inputRef}
@@ -114,18 +151,19 @@ export default function Header({ placeholder = 'Search organizations' }) {
             onChange={handleInputChange}
             onFocus={() => setFocused(true)}
             onBlur={() => setTimeout(() => setFocused(false), 200)}
-            style={{ 
-              fontSize: '12px', 
-              color: '#000000', // Changed to black
-              backgroundColor: '#ffffff', 
-              borderColor: '#A2A2A2', 
-              height: '32px', 
-              paddingLeft: '8px',
-              borderRadius: '0  4px 4px 0',
-              paddingRight: '10px', // Added padding for clear button
-              borderLeft: 'none', 
-              outline: 'none', 
-              boxShadow: 'none' 
+            style={{
+              fontSize: "12px",
+              color: "#000000",
+              backgroundColor: "#ffffff",
+              borderColor: "#A2A2A2",
+              height: "32px",
+              paddingLeft: "8px",
+              borderRadius: "0 4px 4px 0",
+              paddingRight: "10px",
+              borderLeft: "none",
+              outline: "none",
+              boxShadow: "none",
+              [window.innerWidth < 768 ? "paddingLeft" : ""]: "8px", // Adjust padding on mobile
             }}
           />
           {searchTerm && (
@@ -133,38 +171,39 @@ export default function Header({ placeholder = 'Search organizations' }) {
               type="button"
               className="btn btn-sm"
               style={{
-                position: 'absolute',
-                top: '50%',
-                transform: 'translateY(-50%)',
+                position: "absolute",
+                top: "50%",
+                transform: "translateY(-50%)",
                 zIndex: 5,
-                background: 'none',
-                border: 'none',
-                padding: '0',
-                width: '16px',
-                height: '16px'
+                background: "none",
+                border: "none",
+                padding: "0",
+                width: "16px",
+                height: "16px",
               }}
               onClick={handleClearSearch}
               aria-label="Clear search"
             />
           )}
-          
+
           {/* Suggestions Dropdown */}
           {(showSuggestions || focused) && suggestions.length > 0 && (
             <div
               ref={dropdownRef}
               style={{
-                position: 'absolute',
-                top: '100%',
+                position: "absolute",
+                top: "100%",
                 left: 0,
                 right: 0,
-                backgroundColor: 'white',
-                border: '1px solid #A2A2A2',
-                borderTop: 'none',
-                borderRadius: '0 0 4px 4px',
-                maxHeight: '200px',
-                overflowY: 'auto',
+                backgroundColor: "white",
+                border: "1px solid #A2A2A2",
+                borderTop: "none",
+                borderRadius: "0 0 4px 4px",
+                maxHeight: "200px",
+                overflowY: "auto",
                 zIndex: 1000,
-                boxShadow: '0 2px 8px rgba(0,0,0,0.1)'
+                boxShadow: "0 2px 8px rgba(0,0,0,0.1)",
+                [window.innerWidth < 768 ? "width" : ""]: "100%", // Full width on mobile
               }}
             >
               {suggestions.map((item) => (
@@ -172,14 +211,14 @@ export default function Header({ placeholder = 'Search organizations' }) {
                   key={item.id}
                   className="p-2 suggestion-item"
                   style={{
-                    cursor: 'pointer',
-                    padding: '8px 12px',
-                    borderBottom: '1px solid #f0f0f0',
-                    fontSize: '12px'
+                    cursor: "pointer",
+                    padding: "8px 12px",
+                    borderBottom: "1px solid #f0f0f0",
+                    fontSize: "12px",
                   }}
                   onClick={() => handleSuggestionClick(item)}
-                  onMouseEnter={(e) => e.target.style.backgroundColor = '#f8f9fa'}
-                  onMouseLeave={(e) => e.target.style.backgroundColor = 'white'}
+                  onMouseEnter={(e) => (e.target.style.backgroundColor = "#f8f9fa")}
+                  onMouseLeave={(e) => (e.target.style.backgroundColor = "white")}
                 >
                   {item.name}
                 </div>

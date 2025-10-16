@@ -1,10 +1,11 @@
 "use client";
+import React from "react";
 import { useEffect, useState } from "react";
 import { useSearch } from "../../../../context/SearchContext";
 import CourseCardGrid from "../../../../components/CourseCardGrid";
 
 export default function OrgDashboard({ params }) {
-  const { orgId } = params;
+  const { orgId } = React.use(params);
   const { searchTerm, isSearching } = useSearch();
   const [orgName, setOrgName] = useState("Organization");
   const [classesData, setClassesData] = useState([]);

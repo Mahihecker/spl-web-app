@@ -86,19 +86,19 @@ export default function Favorites({ params }) {
 
   return (
     <div className="d-flex flex-column h-100 p-3">
-      <div className="d-flex justify-content-between align-items-center mb-4">
-        <h1 style={{ fontSize: "20px", fontWeight: 600 }}>Favourites</h1>
+      <div className="d-flex justify-content-between align-items-center mb-4" style={{ padding: "25px 4px 0px" }}>
+        <h1 style={{ fontSize: "25px", fontWeight: 600 }}>Favourites</h1>
         <div>
           <button
-            className={`btn ${activeTab === "Vocabulary" ? "btn-primary" : "btn-outline-primary"} rounded me-2`}
-            style={{ backgroundColor: activeTab === "Vocabulary" ? "#5437ED" : "", color: activeTab === "Vocabulary" ? "#FFFFFF" : "#5437ED" }}
+            className={`btn ${activeTab === "Vocabulary" ? "btn-primary shadow-sm" : "btn-outline-primary shadow-sm"} me-2`}
+            style={{ backgroundColor: activeTab === "Vocabulary" ? "#6342E7" : "white", color: activeTab === "Vocabulary" ? "#FFFFFF" : "#637381",borderRadius: '4px', fontSize: "12px", padding: "4px 10px", borderColor: activeTab === "Vocabulary" ? "transparent" : "#637381" }}
             onClick={() => setActiveTab("Vocabulary")}
           >
             Vocabulary
           </button>
           <button
-            className={`btn ${activeTab === "Tutorial" ? "btn-primary" : "btn-outline-primary"} rounded`}
-            style={{ backgroundColor: activeTab === "Tutorial" ? "#5437ED" : "", color: activeTab === "Tutorial" ? "#FFFFFF" : "#5437ED" }}
+            className={`btn ${activeTab === "Tutorial" ? "btn-primary shadow-sm" : "btn-outline-primary shadow-sm"}`}
+            style={{ backgroundColor: activeTab === "Tutorial" ? "#6342E7" : "white", color: activeTab === "Tutorial" ? "#FFFFFF" : "#637381",borderRadius: '4px', fontSize: "12px", padding: "4px 10px", borderColor: activeTab === "Tutorial" ? "transparent" : "#637381" }}
             onClick={() => setActiveTab("Tutorial")}
           >
             Tutorial

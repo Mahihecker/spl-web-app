@@ -1,12 +1,12 @@
 "use client";
 import { useRouter } from "next/navigation";
 
-export default function ClassCard({ classInfo, orgId }) {
+export default function SubjectsCard({ classInfo, orgId, classId }) {
   const router = useRouter();
 
   return (
     <div
-      onClick={() => router.push(`/general/dashboard/${orgId}/${classInfo.id}/subjects`)}
+      onClick={() => router.push(`/general/dashboard/${orgId}/${classId}/subjects/${SubjectId}`)}
       className="col-12 col-md-4 d-flex flex-column justify-content-center"
       style={{
         width: "260px",
@@ -23,14 +23,16 @@ export default function ClassCard({ classInfo, orgId }) {
       <div className="d-flex align-items-center" style={{ padding: "0" }}>
         <div style={{ width: "4px", height: "20px", backgroundColor: "#5437ED"}} />
         <div className="card-body flex-grow-1 d-flex justify-content-center">
-            <h5 className="card-title text-center" style={{ fontSize: "16px", fontWeight: "600", color: "#5437ED", margin: "0" }}>{classInfo.name}</h5>
-          </div>
+          <h5 className="card-title text-center" style={{ fontSize: "16px", fontWeight: "600", color: "#5437ED", margin: "0" }}>
+            {classInfo.name}
+          </h5>
+        </div>
       </div>
       <p
         className="mb-2 text-center"
         style={{ fontSize: "12px", fontWeight: "500", color: "#838799", marginTop: "15px" }}
       >
-        {classInfo.Subjects_total} Subjects
+        {classInfo["total-lessons"]} Lessons
       </p>
     </div>
   );

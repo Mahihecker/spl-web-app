@@ -77,13 +77,13 @@ export default function EssentialVocab({ params }) {
   return (
     <div className="d-flex flex-column h-100 p-3">
       <nav aria-label="breadcrumb">
-        <ol className="breadcrumb mb-4" style={{ fontSize: "20px", fontWeight: "600", listStyle: "none", padding: "0", display: "flex", alignItems: "center" }}>
+        <ol className="breadcrumb mb-4" style={{ fontSize: "25px", fontWeight: "600", listStyle: "none", padding: "20px 4px 0px", display: "flex", alignItems: "center" }}>
           <li className="breadcrumb-item">
-            <a href={`/general/dashboard/${orgId}`} className="text-primary" style={{ textDecoration: "none", color: "#5437ED", marginRight: "8px" }}>
+            <a href={`/general/dashboard/${orgId}`} style={{ textDecoration: "none", color: "#5437ED", marginRight: "8px" }}>
               {orgName}
             </a>
           </li>
-          <li style={{ margin: "0 8px" }}>&gt;</li> {/* Filled arrow like side panel */}
+          <li style={{ margin: "0 8px", color: "#808080", fontSize: "20px", borderRadius: "4px", padding: "0 4px" }}>&rsaquo;</li> {/* Filled arrow like side panel */}
           <li className="breadcrumb-item active" aria-current="page" style={{ color: "#000", marginLeft: "8px" }}>
             Essential Vocabulary
           </li>
@@ -93,7 +93,7 @@ export default function EssentialVocab({ params }) {
       {loading ? (
         <p>Loading...</p>
       ) : (
-        <div className="flex-grow-1 overflow-y-auto" style={{ maxHeight: "calc(100vh - 150px)", overflowX: "hidden" }}>
+        <div className="flex-grow-1 overflow-y-auto" style={{ maxHeight: "calc(100vh - 180px)", overflowX: "hidden" }}>
           <div className="row row-cols-1 row-cols-md-4 g-4">
             {filteredVocab.length > 0 ? (
               filteredVocab.map((item) => (
